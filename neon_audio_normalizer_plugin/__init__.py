@@ -19,7 +19,7 @@
 # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 # USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from ovos_plugin_manager.templates.audio_transformer import AudioTransformer
+from neon_transformers import AudioTransformer
 from pydub import AudioSegment
 import tempfile
 from os.path import join
@@ -71,7 +71,7 @@ class AudioNormalizer(AudioTransformer):
             trim_ms += chunk_size
         return trim_ms
 
-    def on_speech_end(self, audio_data):
+    def transform(self, audio_data):
         audio_data, filename = self.trim_silence(audio_data)
         return audio_data, {"audio_filename": filename}
 
