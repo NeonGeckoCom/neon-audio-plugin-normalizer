@@ -48,11 +48,14 @@ class AudioNormalizer(AudioTransformer):
                                                audio_data.dBFS + self.thresh
                                                // 3)
         trimmed = audio_data[start_trim:-end_trim]
-        # if len(trimmed) >= 0.15 * len(audio_data):
-        audio_data = trimmed
-        if audio_data.dBFS != self.final_db:
-            change_needed = self.final_db - audio_data.dBFS
-            audio_data = audio_data.apply_gain(change_needed)
+        # sometimes if volume is low the whole audio gets
+        # trimmed including speech, this naive check accounts for this
+        # this can be improved by adjusting self.thresh dynamically
+        if len(trimmed) >= 0.15 * len(audio_data):
+            audio_data = trimmed
+            if audio_data.dBFS != self.final_db:
+                change_needed = self.final_db - audio_data.dBFS
+                audio_data = audio_data.apply_gain(change_needed)
 
         filename = join(tempfile.gettempdir(), str(time.time()) + ".wav")
         audio_data.export(filename, format="wav")
