@@ -24,9 +24,12 @@ from pydub import AudioSegment
 import tempfile
 from os.path import join
 import time
+from neon_transformers.tasks import AudioTask
 
 
 class AudioNormalizer(AudioTransformer):
+    task = AudioTask.REMOVE_NOISE
+
     def __init__(self, config=None):
         super().__init__("audio_normalizer", 1, config=config)
         # silence_threshold in dB
