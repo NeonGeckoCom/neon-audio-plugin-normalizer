@@ -12,6 +12,8 @@ setup(
     author_email='jarbasai@mailfence.com',
     license='bsd3',
     packages=['neon_audio_normalizer_plugin'],
+    install_requires=["pydub~=0.23",
+"neon_transformers"],
     zip_safe=True,
     keywords='mycroft plugin audio parser/classifier/transformer',
     entry_points={'neon.plugin.audio': PLUGIN_ENTRY_POINT}
