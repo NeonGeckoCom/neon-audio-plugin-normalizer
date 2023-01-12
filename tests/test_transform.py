@@ -52,8 +52,15 @@ class NormalaizerTransformerTest(unittest.TestCase):
         cls.extractor = AudioNormalizer()
 
     def test_transform(self):
-        segment = AudioSegment.from_file('/home/dmytro/Documents/GitHub/neon-audio-plugin-normalizer/neon_audio_normalizer_plugin/where is pandora store.wav')
+        from pathlib import Path
+        current=Path.cwd()
+        path = str(current) + '/where is pandora store.wav'
+        print(path)
+        segment = AudioSegment.from_file(path)
         audio_data = AudioData(segment.raw_data, segment.frame_rate,segment.sample_width)
         lang = (self.extractor.transform(audio_data))
+        print(type(lang))
         test=lang[-1]
-        self.assertEqual(test, ("{'audio_filename': '/tmp/test_time.wav'}"))
+        #print(type(test))
+        self.assertIsInstance(lang,tuple)
+        self.assertTrue(os.path.isfile(test['audio_filename']))

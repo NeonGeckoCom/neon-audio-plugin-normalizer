@@ -57,11 +57,11 @@ class AudioNormalizer(AudioTransformer):
                 change_needed = self.final_db - audio_data.dBFS
                 audio_data = audio_data.apply_gain(change_needed)
 
-        filename =join(tempfile.gettempdir() + "/test_time.wav")
-        # was needed to delet str time , dont find way to check with different time
+        filename =join(tempfile.gettempdir(), str(time.time()) + ".wav")
         audio_data.export(filename, format="wav")
         with open(filename, "rb") as byte_data:
-            return byte_data.read(), filename
+            data = byte_data.read()
+        return data, filename
 
     @staticmethod
     def detect_leading_silence(sound, silence_threshold=-36.0, chunk_size=10):

@@ -36,11 +36,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements/requirements.txt
           pip install -r requirements/test_requirements.txt
-      - name: Test simpleNER extractor
+      - name: Test simpleNER transform
         run: |
-          pytest tests/test_extract.py --doctest-modules --junitxml=tests/test-extract-results.xml
-      - name: Upload test extract results
+          pytest tests/test_transform.py --doctest-modules --junitxml=tests/test-transform-results.xml
+      - name: Upload test transform results
         uses: actions/upload-artifact@v2
         with:
-          name: test-extract-results
-          path: tests/test-extract-results.xml
+          name: test-transform-results
+          path: tests/test-transform-results.xml
