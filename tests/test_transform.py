@@ -34,18 +34,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from neon_audio_normalizer_plugin import *
 from speech_recognition import AudioData
 
-import wave
-from scipy.io import wavfile
-#samplerate, data = wavfile.read('where is pandora store.wav')
-#
-# segment = AudioSegment.from_file('/home/dmytro/Documents/GitHub/neon-audio-plugin-normalizer/neon_audio_normalizer_plugin/where is pandora store.wav')
-# audio_data = AudioData(segment.raw_data, segment.frame_rate,
-# segment.sample_width)
-#
-# instance = AudioNormalizer()
-# a= instance.transform(audio_data)
-# print(a[-1])
-
 class NormalaizerTransformerTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
