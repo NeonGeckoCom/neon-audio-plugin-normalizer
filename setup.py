@@ -2,9 +2,9 @@
 from setuptools import setup
 
 
-PLUGIN_ENTRY_POINT = 'neon_audio_normalizer_plugin=neon_audio_normalizer_plugin:AudioNormalizer'
+PLUGIN_ENTRY_POINT = 'neon-audio-plugin-normalizer=neon_audio_normalizer_plugin:AudioNormalizer'
 setup(
-    name='neon_audio_normalizer_plugin',
+    name='neon-audio-plugin-normalizer',
     version='0.0.1',
     description='A audio parser/classifier/transformer plugin for ovos/neon/mycroft',
     url='https://github.com/NeonGeckoCom/neon_audio_normalizer_plugin',

@@ -38,7 +38,7 @@ class AudioNormalizer(AudioTransformer):
         self.final_db = self.config.get("final_volume", -18.0)
 
     def trim_silence(self, audio_data):
-        audio_data = AudioSegment(data=audio_data,
+        audio_data = AudioSegment(data=audio_data.get_raw_data(),
                                   sample_width=self.sample_width,
                                   frame_rate=self.sample_rate,
                                   channels=self.channels)
@@ -57,10 +57,11 @@ class AudioNormalizer(AudioTransformer):
                 change_needed = self.final_db - audio_data.dBFS
                 audio_data = audio_data.apply_gain(change_needed)
 
-        filename = join(tempfile.gettempdir(), str(time.time()) + ".wav")
+        filename =join(tempfile.gettempdir(), str(time.time()) + ".wav")
         audio_data.export(filename, format="wav")
         with open(filename, "rb") as byte_data:
-            return byte_data.read(), filename
+            data = byte_data.read()
+        return data, filename
 
     @staticmethod
     def detect_leading_silence(sound, silence_threshold=-36.0, chunk_size=10):
